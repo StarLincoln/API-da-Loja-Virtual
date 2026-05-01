@@ -38,12 +38,32 @@ app.post("/produtos", async (req, res) => {
             estoque,
             disponivel: Boolean(estoque)
         }
-        
+        arrProdutos.push(produto)
+
         await writeFile(caminho, JSON.stringify(arrProdutos))
         console.log("Produto adicionado com sucesso")
         res.status(201).json(produto)
-    } catch (err) {
+    } catch {
         res.status(500).json({erro: "Não foi possível criar produto"})
+    }
+})
+
+app.put("/produtos/:id", async (req, res) => {
+    try { 
+        const arrProdutos = await lerDados() || []
+        const index = arrProdutos.findIndex(x => x.id === Number(req.params.id))
+
+        if(index === -1) return res.status(404).json({erro: "ID inexistente"})
+
+        const euNaoGostodeTS ={...arrProdutos[index], ...req.body, id: Number(req.params.id)}
+        if (req.body.preco) euNaoGostodeTS.preco = Number(req.body.preco)
+        arrProdutos[index] = euNaoGostodeTS
+
+        await writeFile(caminho, JSON.stringify(arrProdutos, null, 2))
+        console.log("Produto atualizado com sucesso")
+        res.status(200).json(arrProdutos[index])
+    } catch {
+        res.status(500).json({erro: "Erro ao atualizar"})
     }
 })
 app.listen(PORT, () => console.log("Rodando o server"))
