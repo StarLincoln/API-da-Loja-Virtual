@@ -1,0 +1,26 @@
+{
+  "dependencies": {
+    "ejs": "^5.0.2",
+    "prompt-sync": "^4.2.0"
+  },
+  "devDependencies": {
+    "@types/ejs": "^3.1.5",
+    "@types/express": "^5.0.6",
+    "@types/node": "^25.6.0",
+    "@types/prompt-sync": "^4.2.3",
+    "express": "^5.2.1",
+    "tsx": "^4.21.0"
+  },
+  "name": "projeto-loja",
+  "types": "module",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsx Source/TypeScript/Projeto\\ loja/main.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module"
+}
