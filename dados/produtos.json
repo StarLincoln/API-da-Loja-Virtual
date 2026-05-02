@@ -1,8 +1,8 @@
 [
   {
     "id": 0,
-    "nome": "Camisa adidas",
-    "preco": 100,
+    "nome": "Camisa adidas 3",
+    "preco": 300,
     "categoria": "Roupa",
     "estoque": 30,
     "disponivel": true
@@ -21,6 +21,22 @@
     "preco": 300,
     "categoria": "Roupa",
     "estoque": 30,
+    "disponivel": true
+  },
+  {
+    "id": 3,
+    "nome": "Maçã",
+    "preco": 4,
+    "categoria": "Alimento",
+    "estoque": 0,
+    "disponivel": false
+  },
+  {
+    "id": 4,
+    "nome": "Celular",
+    "preco": 1000,
+    "categoria": "Eletronico",
+    "estoque": 5,
     "disponivel": true
   }
 ]

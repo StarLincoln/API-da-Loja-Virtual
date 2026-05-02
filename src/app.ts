@@ -91,14 +91,18 @@ app.put("/produtos/:id", async (req, res) => {
 app.get("/produtos", async (req, res) => {
     try {
         const arrProdutos = await carregarDados()
-        res.status(200).json(arrProdutos)
+        res.status(200).json({arrProdutos})
     } catch {
         res.status(500).json({erro: "Erro ao ver os Produtos"})
     }
 })
-app.get("/produtos", async (req, res) => {
-    const arrProdutos = await carregarDados()
-    res.render("produtos", {arrProdutos})
+app.get("loja/produtos", async (req, res) => {
+    try {
+        const arrProdutos = await carregarDados()
+        res.status(200).render("produtos", {arrProdutos})
+    } catch (erro) {
+        res.status(500).render("erro", {erro})
+    }
 })
 // Ver um produto pelo id - GET
 app.get("/produtos/:id", async (req, res) => {
@@ -107,12 +111,12 @@ app.get("/produtos/:id", async (req, res) => {
         const index = arrProdutos.findIndex(x => x.id === Number(req.params.id))
         if(index === -1) return res.status(404).json({erro: "ID inesxistente"})
 
-        res.status(200).json(arrProdutos[index])
+        res.status(200).render("detalhe", {arrProdutos: arrProdutos[index]})
     } catch {
         res.status(500).json({erro: "Erro ao ver um Produto"})
     }
 })
-// Deletar um produto
+// Deletar um produto - Delete
 app.delete("/produtos/:id", async (req, res) => {
     try {
         const arrProdutos = await carregarDados()

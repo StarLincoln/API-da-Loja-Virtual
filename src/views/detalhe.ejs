@@ -1,0 +1,30 @@
+<style>
+    .contain {
+        padding-inline: 10px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: aliceblue;
+        border: 2px, solid, gray;
+    }
+    ul {
+        border-radius: 5%;
+        padding-block: 10px;
+    }
+    .disponivel {
+        background-color: greenyellow;
+    }
+    .esgotado {
+        background-color: red;
+    }
+</style>
+<div class="contain">
+    <h1>Produto: <%= arrProdutos.nome %></h1>
+    <ul class="<%= arrProdutos.estoque > 0? 'disponivel' : 'esgotado' %>">
+        <li>Preço: R$<%= arrProdutos.preco %></li>
+        <li>Categoria: <%= arrProdutos.categoria %></li>
+        <li>Estoque: <%= arrProdutos.estoque %></li>
+        <li>Disponível: <%= arrProdutos > 0? 'Disponível': 'Esgotado' %></li>
+    </ul>
+</div>
