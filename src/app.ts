@@ -1,5 +1,5 @@
 import { readFile, writeFile } from 'fs/promises';
-import express from 'express';
+import express, { type Request, type Response, type NextFunction} from 'express';
 const app = express();
 const PORT = 3000;
 
@@ -44,7 +44,6 @@ async function salvarProdutos(produtos: Produto[]): Promise<void> {
     const produtoString = JSON.stringify(produtos, null, 2)
     await writeFile(caminho, produtoString)
 }
-
 // Bloco 4 - Rotas API/ JSON
 // Criar Produto - POST
 app.post("/produtos", async (req, res) => {
@@ -96,14 +95,6 @@ app.get("/produtos", async (req, res) => {
         res.status(500).json({erro: "Erro ao ver os Produtos"})
     }
 })
-app.get("loja/produtos", async (req, res) => {
-    try {
-        const arrProdutos = await carregarDados()
-        res.status(200).render("produtos", {arrProdutos})
-    } catch (erro) {
-        res.status(500).render("erro", {erro})
-    }
-})
 // Ver um produto pelo id - GET
 app.get("/produtos/:id", async (req, res) => {
     try {
@@ -111,7 +102,7 @@ app.get("/produtos/:id", async (req, res) => {
         const index = arrProdutos.findIndex(x => x.id === Number(req.params.id))
         if(index === -1) return res.status(404).json({erro: "ID inesxistente"})
 
-        res.status(200).render("detalhe", {arrProdutos: arrProdutos[index]})
+        res.status(200).json(arrProdutos[index])
     } catch {
         res.status(500).json({erro: "Erro ao ver um Produto"})
     }
@@ -129,6 +120,43 @@ app.delete("/produtos/:id", async (req, res) => {
         salvarProdutos(arrProdutos)
         res.status(200).json(produtoRemove)
     } catch {}
+})
+// Bloco 5 - Páginas HTML com EJS
+// Ver a lista de produtos
+app.get("/loja/produtos", async (req, res) => {
+    try {
+        const arrProdutos = await carregarDados()
+        res.status(200).render("produtos", {arrProdutos})
+    } catch {
+        res.status(500)
+    }
+})
+// Ver detalher de um produto
+app.get("/loja/produtos/:id", async (req, res) => {
+    try {
+        const arrProdutos = await carregarDados()
+        const index = arrProdutos.findIndex(x => x.id === Number(req.params.id))
+        if(index === -1) return res.status(404).json({erro: "ID inesxistente"})
+
+        res.status(200).render("detalhe", {arrProdutos: arrProdutos[index]})
+    } catch {
+        res.status(500).json({erro: "Erro ao ver um Produto"})
+    }
+})
+// Função para mostrar o erro + Rota para testar o Erro
+app.get("/teste-erro", (req, res, next) => {
+    next(new Error("Erro proposital"));
+    res.status(500)
+});
+app.use((erro: any, req: Request, res: Response, next: NextFunction) => {
+    const err = erro as Error || new Error("Erro desconhecido")
+
+    res.render("erro", {
+        nome: err.name || "Error",
+        mensagem: err.message || "Algo deu Errado",
+        causa: err.cause,
+        detalhe: process.env.NODE_ENV === "development"? err.stack: null
+    })
 })
 
 app.listen(PORT, () => console.log("Rodando o server"))

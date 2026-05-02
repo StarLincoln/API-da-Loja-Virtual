@@ -1,1 +1,13 @@
-<h1>Erro em </h1>
+<h1>Houve um ERRO!</h1>
+<h2><%= nome %></h2>
+<p><%= mensagem %></p>
+
+
+<% if(locals.causa) { %>
+    <h3> Causa: </h3>
+    <pre> <%= causa %> </pre>
+<% } %>
+<% if(detalhe) {%>
+    <h3> Detalhes: </h3>
+    <pre> <%= detalhe %> </pre>
+<% } %>
