@@ -1,12 +1,12 @@
 import { readFile, writeFile } from 'fs/promises';
-import express from 'express'
+import express from 'express';
 const app = express();
 const PORT = 3000;
 
 // Bloco 3 - Middlewares
 app.use(express.json())
-express.urlencoded({extended: true})
-express.static("public")
+app.use(express.urlencoded({extended: true}))
+app.use(express.static("public"))
 app.set("view engine", "ejs")
 app.set("views", "/home/caio_lincoln/VS Code/api-loja/src/views")
 // Logger customizado
@@ -21,15 +21,15 @@ interface Produto {
     id: number,
     nome: string,
     preco: number,
-    categoria?: "Eletrônico" | "Roupa" | "Alimento" | "Outro",
+    categoria: "Eletrônico" | "Roupa" | "Alimento" | "Outro",
     estoque?: number,
     disponivel?: boolean
 }
 
 // Bloco 2 - Persistência em JSON
 const caminho: string = "/home/caio_lincoln/VS Code/api-loja/dados/produtos.json"
-// CarregarDados()
-async function CarregarDados(): Promise<Produto[]> {
+// carregarDados()
+async function carregarDados(): Promise<Produto[]> {
     try{
         const data = await readFile(caminho, 'utf-8')
         const arrProdutos: Produto[] = JSON.parse(data)
@@ -41,18 +41,19 @@ async function CarregarDados(): Promise<Produto[]> {
 }
 // salvarProdutos()
 async function salvarProdutos(produtos: Produto[]): Promise<void> {
-    const produtoString = JSON.stringify(produtos)
-    await writeFile(caminho, JSON.stringify(produtoString, null, 2))
+    const produtoString = JSON.stringify(produtos, null, 2)
+    await writeFile(caminho, produtoString)
 }
 
 // Bloco 4 - Rotas API/ JSON
-// Criar Produto
+// Criar Produto - POST
 app.post("/produtos", async (req, res) => {
     try{
         const {nome, preco, categoria, estoque} = req.body
-        const arrProdutos = await CarregarDados() || []
+        const arrProdutos = await carregarDados() || []
+        let proximoID = Math.max(...arrProdutos.map(x => x.id)) + 1
         const produto: Produto = {
-            id: arrProdutos.length + 1,
+            id: proximoID,
             nome,
             preco: Number(preco),
             categoria,
@@ -61,30 +62,50 @@ app.post("/produtos", async (req, res) => {
         }
         arrProdutos.push(produto)
 
-        await writeFile(caminho, JSON.stringify(arrProdutos))
+        salvarProdutos(arrProdutos)
         console.log("Produto adicionado com sucesso")
         res.status(201).json(produto)
     } catch {
         res.status(500).json({erro: "Não foi possível criar produto"})
     }
 })
-// Atualizar Produto
+// Atualizar Produto - PUT
 app.put("/produtos/:id", async (req, res) => {
     try { 
-        const arrProdutos = await CarregarDados() || []
+        const arrProdutos = await carregarDados() || []
         const index = arrProdutos.findIndex(x => x.id === Number(req.params.id))
 
         if(index === -1) return res.status(404).json({erro: "ID inexistente"})
-
         const euNaoGostodeTS = {...arrProdutos[index], ...req.body, id: Number(req.params.id)}
         if (req.body.preco) euNaoGostodeTS.preco = Number(req.body.preco)
         arrProdutos[index] = euNaoGostodeTS
 
-        await writeFile(caminho, JSON.stringify(arrProdutos, null, 2))
+        salvarProdutos(arrProdutos)
         console.log("Produto atualizado com sucesso")
         res.status(200).json(arrProdutos[index])
     } catch {
         res.status(500).json({erro: "Erro ao atualizar"})
     }
 })
+// Ver todos os produtos - GET
+app.get("/produtos", async (req, res) => {
+    try {
+        const arrProdutos = await carregarDados()
+        res.status(200).json(arrProdutos)
+    } catch {
+        res.status(500).json({erro: "Erro ao ver os Produtos"})
+    }
+})
+// Ver um produto pelo id - GET
+app.get("/produtos/:id", async (req, res) => {
+    try {
+        const produto = (await carregarDados()).find(x => x.id === Number(req.params.id))
+        if(!produto) return res.status(404).json({erro: "ID inesxistente"})
+        res.status(200).json(produto)
+    } catch {
+        res.status(500).json({erro: "Erro ao ver um Produto"})
+    }
+})
+
+
 app.listen(PORT, () => console.log("Rodando o server"))

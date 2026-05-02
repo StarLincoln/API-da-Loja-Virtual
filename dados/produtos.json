@@ -1,18 +1,34 @@
 [
   {
-    "id": 1,
-    "nome": "Celular",
-    "preco": 80,
-    "categoria": "Eletrônico",
-    "estoque": 20,
+    "id": null,
+    "nome": "Camisa adidas",
+    "preco": 100,
+    "categoria": "Roupa",
+    "estoque": 30,
     "disponivel": true
   },
   {
+    "id": 1,
+    "nome": "Camisa adidas",
     "preco": 100,
-    "id": 2,
-    "nome": "Nike",
     "categoria": "Roupa",
-    "estoque": 50,
+    "estoque": 30,
+    "disponivel": true
+  },
+  {
+    "id": 2,
+    "nome": "Camisa adidas 2",
+    "preco": 100,
+    "categoria": "Roupa",
+    "estoque": 30,
+    "disponivel": true
+  },
+  {
+    "id": 3,
+    "nome": "Camisa adidas",
+    "preco": 100,
+    "categoria": "Roupa",
+    "estoque": 30,
     "disponivel": true
   }
 ]
