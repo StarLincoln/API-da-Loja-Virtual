@@ -14,5 +14,13 @@
     "categoria": "Roupa",
     "estoque": 30,
     "disponivel": true
+  },
+  {
+    "id": 2,
+    "nome": "Camisa adidas 3",
+    "preco": 300,
+    "categoria": "Roupa",
+    "estoque": 30,
+    "disponivel": true
   }
 ]

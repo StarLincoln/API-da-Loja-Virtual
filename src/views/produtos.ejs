@@ -1,0 +1,40 @@
+<h1> Todos os Produtos </h1>
+<table border="1">
+    <tbody>
+        <% arrProdutos.forEach(p => { %>
+            <tr>
+                <th colspan="3">Produto <%= p.id %> </th>
+            </tr>
+            <tr>
+                <td>Categoria</td>
+                <td>Nome</td>
+                <td><%= p.nome %></td>
+            </tr>
+            <tr>
+            <tr>
+                <td rowspan="2">
+                    <% if (p.categoria === "Eletrônico") { %>
+                        🖥️
+                    <% } else if (p.categoria === "Roupa") { %>
+                        👕
+                    <% } else if (p.categoria === "Alimento") { %>
+                        🍕
+                    <% } else { %>
+                        ➕
+                    <% } %>
+                </td>
+                <td>Preço</td>
+                <td><%= p.preco %></td>
+            </tr>
+            <tr>
+                <td>Estoque</td>
+                <td><%= p.estoque %></td>
+            </tr>
+            <tr>
+                <td><%= p.categoria %></td>
+                <td>Disponivel</td>
+                <td><%= p.disponivel %></td>
+            </tr>
+        <% }) %>
+    </tbody>
+</table>

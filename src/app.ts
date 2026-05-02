@@ -96,6 +96,10 @@ app.get("/produtos", async (req, res) => {
         res.status(500).json({erro: "Erro ao ver os Produtos"})
     }
 })
+app.get("/produtos", async (req, res) => {
+    const arrProdutos = await carregarDados()
+    res.render("produtos", {arrProdutos})
+})
 // Ver um produto pelo id - GET
 app.get("/produtos/:id", async (req, res) => {
     try {
