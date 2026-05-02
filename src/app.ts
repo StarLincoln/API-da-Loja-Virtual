@@ -3,18 +3,18 @@ import express from 'express'
 const app = express();
 const PORT = 3000;
 
+// Bloco 3 - Middlewares
 app.use(express.json())
-
-const caminho: string = "/home/caio_lincoln/VS Code/api-loja/dados/produtos.json"
-async function lerDados() {
-    try{
-        const data = await readFile(caminho, 'utf-8')
-        const arrProdutos: Produto[] = JSON.parse(data)
-        return arrProdutos
-    } catch (err) {
-        console.log("não foi possível ler o json.", err)
-    }
-}
+express.urlencoded({extended: true})
+express.static("public")
+app.set("view engine", "ejs")
+app.set("views", "/home/caio_lincoln/VS Code/api-loja/src/views")
+// Logger customizado
+app.use((req, res, next) => {
+    const hora = new Date().toLocaleTimeString()
+    console.log(hora, req.method, req.url)
+    next()
+})
 
 // Bloco 1 - Interface
 interface Produto {
@@ -26,10 +26,31 @@ interface Produto {
     disponivel?: boolean
 }
 
+// Bloco 2 - Persistência em JSON
+const caminho: string = "/home/caio_lincoln/VS Code/api-loja/dados/produtos.json"
+// CarregarDados()
+async function CarregarDados(): Promise<Produto[]> {
+    try{
+        const data = await readFile(caminho, 'utf-8')
+        const arrProdutos: Produto[] = JSON.parse(data)
+        return arrProdutos
+    } catch (err) {
+        writeFile(caminho, "[]")
+        return []
+    }
+}
+// salvarProdutos()
+async function salvarProdutos(produtos: Produto[]): Promise<void> {
+    const produtoString = JSON.stringify(produtos)
+    await writeFile(caminho, JSON.stringify(produtoString, null, 2))
+}
+
+// Bloco 4 - Rotas API/ JSON
+// Criar Produto
 app.post("/produtos", async (req, res) => {
     try{
         const {nome, preco, categoria, estoque} = req.body
-        const arrProdutos = await lerDados() || []
+        const arrProdutos = await CarregarDados() || []
         const produto: Produto = {
             id: arrProdutos.length + 1,
             nome,
@@ -47,15 +68,15 @@ app.post("/produtos", async (req, res) => {
         res.status(500).json({erro: "Não foi possível criar produto"})
     }
 })
-
+// Atualizar Produto
 app.put("/produtos/:id", async (req, res) => {
     try { 
-        const arrProdutos = await lerDados() || []
+        const arrProdutos = await CarregarDados() || []
         const index = arrProdutos.findIndex(x => x.id === Number(req.params.id))
 
         if(index === -1) return res.status(404).json({erro: "ID inexistente"})
 
-        const euNaoGostodeTS ={...arrProdutos[index], ...req.body, id: Number(req.params.id)}
+        const euNaoGostodeTS = {...arrProdutos[index], ...req.body, id: Number(req.params.id)}
         if (req.body.preco) euNaoGostodeTS.preco = Number(req.body.preco)
         arrProdutos[index] = euNaoGostodeTS
 
