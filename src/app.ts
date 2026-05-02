@@ -51,9 +51,9 @@ app.post("/produtos", async (req, res) => {
     try{
         const {nome, preco, categoria, estoque} = req.body
         const arrProdutos = await carregarDados() || []
-        let proximoID = Math.max(...arrProdutos.map(x => x.id)) + 1
+        let proximoID = Math.max(...arrProdutos.map(x => x.id))?? 0
         const produto: Produto = {
-            id: proximoID,
+            id: proximoID + 1,
             nome,
             preco: Number(preco),
             categoria,
@@ -99,13 +99,28 @@ app.get("/produtos", async (req, res) => {
 // Ver um produto pelo id - GET
 app.get("/produtos/:id", async (req, res) => {
     try {
-        const produto = (await carregarDados()).find(x => x.id === Number(req.params.id))
-        if(!produto) return res.status(404).json({erro: "ID inesxistente"})
-        res.status(200).json(produto)
+        const arrProdutos = await carregarDados()
+        const index = arrProdutos.findIndex(x => x.id === Number(req.params.id))
+        if(index === -1) return res.status(404).json({erro: "ID inesxistente"})
+
+        res.status(200).json(arrProdutos[index])
     } catch {
         res.status(500).json({erro: "Erro ao ver um Produto"})
     }
 })
-
+// Deletar um produto
+app.delete("/produtos/:id", async (req, res) => {
+    try {
+        const arrProdutos = await carregarDados()
+        const index = arrProdutos.findIndex(x => x.id === Number(req.params.id))
+        if(index === -1) return res.status(404).json({erro: "ID inesxistente"})
+        
+        const produtoRemove = arrProdutos[index]
+        arrProdutos.splice(index, 1)
+        
+        salvarProdutos(arrProdutos)
+        res.status(200).json(produtoRemove)
+    } catch {}
+})
 
 app.listen(PORT, () => console.log("Rodando o server"))

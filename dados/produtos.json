@@ -1,6 +1,6 @@
 [
   {
-    "id": null,
+    "id": 0,
     "nome": "Camisa adidas",
     "preco": 100,
     "categoria": "Roupa",
@@ -9,24 +9,8 @@
   },
   {
     "id": 1,
-    "nome": "Camisa adidas",
-    "preco": 100,
-    "categoria": "Roupa",
-    "estoque": 30,
-    "disponivel": true
-  },
-  {
-    "id": 2,
     "nome": "Camisa adidas 2",
-    "preco": 100,
-    "categoria": "Roupa",
-    "estoque": 30,
-    "disponivel": true
-  },
-  {
-    "id": 3,
-    "nome": "Camisa adidas",
-    "preco": 100,
+    "preco": 200,
     "categoria": "Roupa",
     "estoque": 30,
     "disponivel": true
