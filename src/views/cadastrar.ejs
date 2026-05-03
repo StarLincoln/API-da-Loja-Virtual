@@ -1,0 +1,21 @@
+<h1>Cadastre um produto</h1>
+<form action="/loja/cadastrar" method="post">
+    <label for="nome">Produto: </label>
+    <input type="text" name="nome" /><br>
+
+    <label for="preco">preço</label>
+    <input type="number" name="preco" /><br>
+
+    <label for="categoria">categoria</label>
+    <select name="categoria">
+        <option value="Eletrônico">Eletrônico</option>
+        <option value="Roupa">Roupa</option>
+        <option value="Alimento">Alimento</option>
+        <option value="Outro">Outros</option>
+    </select><br>
+
+    <label for="estoque">Estoque</label>
+    <input type="number" name="estoque"><br>
+
+    <button type="submit"> Enviar </button>
+</form>

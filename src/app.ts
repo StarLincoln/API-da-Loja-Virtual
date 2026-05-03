@@ -50,14 +50,14 @@ app.post("/produtos", async (req, res) => {
     try{
         const {nome, preco, categoria, estoque} = req.body
         const arrProdutos = await carregarDados() || []
-        let proximoID = Math.max(...arrProdutos.map(x => x.id))?? 0
+        let proximoID = Math.max(...arrProdutos.map(x => x.id)) ?? 0
         const produto: Produto = {
             id: proximoID + 1,
             nome,
             preco: Number(preco),
             categoria,
             estoque,
-            disponivel: Boolean(estoque)
+            disponivel: estoque > 0
         }
         arrProdutos.push(produto)
 
@@ -89,6 +89,7 @@ app.put("/produtos/:id", async (req, res) => {
 // Ver todos os produtos - GET
 app.get("/produtos", async (req, res) => {
     try {
+        console.log("Foi possível mostrar todos os Produtos")
         const arrProdutos = await carregarDados()
         res.status(200).json({arrProdutos})
     } catch {
@@ -102,6 +103,7 @@ app.get("/produtos/:id", async (req, res) => {
         const index = arrProdutos.findIndex(x => x.id === Number(req.params.id))
         if(index === -1) return res.status(404).json({erro: "ID inesxistente"})
 
+        console.log("Foi possível acessar Produto", index)
         res.status(200).json(arrProdutos[index])
     } catch {
         res.status(500).json({erro: "Erro ao ver um Produto"})
@@ -117,14 +119,43 @@ app.delete("/produtos/:id", async (req, res) => {
         const produtoRemove = arrProdutos[index]
         arrProdutos.splice(index, 1)
         
+        console.log("Produto removido com sucesso")
         salvarProdutos(arrProdutos)
         res.status(200).json(produtoRemove)
-    } catch {}
+    } catch {
+        res.status(500).json({erro: "Não foi possível excluir o produto"})
+    }
+})
+// Cadastrar um item, ou seja, um segundo post
+app.get("/loja/cadastrar", (req, res) => {
+    res.render("cadastrar"); // seu cadastrar.ejs
+});
+app.post("/loja/cadastrar", async (req, res) => {
+    try {
+        const arrProdutos = await carregarDados()
+        const proximoID: number = arrProdutos.length > 0? Math.max(...arrProdutos.map(x => x.id)) : 0
+        const produto: Produto = {
+            id: proximoID + 1,
+            nome: req.body.nome,
+            preco: req.body.preco,
+            categoria: req.body.categoria,
+            estoque: req.body.estoque,
+            disponivel: Number(req.body.estoque) > 0
+        }
+        arrProdutos.push(produto)
+
+        console.log("Produto cadastrado com sucesso")
+        salvarProdutos(arrProdutos)
+        res.status(200).render("detalhe", {arrProdutos: produto})
+    } catch {
+        res.status(500)
+    }
 })
 // Bloco 5 - Páginas HTML com EJS
 // Ver a lista de produtos
 app.get("/loja/produtos", async (req, res) => {
     try {
+        console.log("Foi possível acessar todos os produtos")
         const arrProdutos = await carregarDados()
         res.status(200).render("produtos", {arrProdutos})
     } catch {
@@ -138,6 +169,7 @@ app.get("/loja/produtos/:id", async (req, res) => {
         const index = arrProdutos.findIndex(x => x.id === Number(req.params.id))
         if(index === -1) return res.status(404).json({erro: "ID inesxistente"})
 
+        console.log("Foi possível acessar Produto", index)
         res.status(200).render("detalhe", {arrProdutos: arrProdutos[index]})
     } catch {
         res.status(500).json({erro: "Erro ao ver um Produto"})

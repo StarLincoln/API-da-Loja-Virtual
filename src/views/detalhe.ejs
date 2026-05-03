@@ -25,6 +25,6 @@
         <li>Preço: R$<%= arrProdutos.preco %></li>
         <li>Categoria: <%= arrProdutos.categoria %></li>
         <li>Estoque: <%= arrProdutos.estoque %></li>
-        <li>Disponível: <%= arrProdutos > 0? 'Disponível': 'Esgotado' %></li>
+        <li>Disponível: <%= arrProdutos.disponivel? 'Disponível': 'Esgotado' %></li>
     </ul>
 </div>
