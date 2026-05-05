@@ -1,0 +1,108 @@
+/* Imports */
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* Tudo */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Tags */
+html {
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+    font-family: "Lato", sans-serif;
+}
+header {
+    margin: 0;
+    padding: 0;
+    background-color: #ffbd59;
+    color: #1a1a1a;
+}
+header img {
+    height: 15vh;
+    margin-left: 2vw;
+    transition: all 1s;
+}
+button {
+    background-color: #00ff41;
+    color: #1a1a1a;
+    font-family: "Montserrat", sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+h1 {
+    font-family: "Montserrat", sans-serif;
+}
+
+/* Classes */
+.butao {
+    font-size: 25px;
+    padding: 5%;
+    height: 20vh;
+    width: 30vmax;
+    border: #262626, solid, 5px;
+    border-radius: 20px;
+}
+.mainContent {
+    margin: 2vw;
+    position: absolute;
+}
+.mainContent h1 {
+    font-size: 50px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+.mainContent p {
+    font-size: 30px;
+}
+.noMeio {
+    display: flex;
+    justify-content: center; 
+    align-items: center;     
+    margin: 3%;
+}
+.formulario {
+    font-family: "Montserrat", sans-serif;
+    font-weight: bold;
+    text-align: center;
+    font-size: 50px;
+    gap: 10px;
+}
+.formulario input {
+    background-color: #00ff41;
+    border: #262626, solid, 1vw;
+    font-family: "Montserrat", sans-serif;
+    font-weight: bold;
+    font-size: 25px;
+    padding: 2vh 1vw;
+    vertical-align: middle;
+    height: 10vh;
+    width: 75vw;
+}
+.formulario button {
+    border: #262626, solid, 1vw;
+    padding: 2vh 1vw;
+    vertical-align: middle;
+    height: 10vh;
+    width: 15vw;
+}
+/* Interações */
+header img:hover {
+    transform: scale(0.9) translate(-10px);
+}
+header img:active {
+    transition: 0.1s;
+    transform: translate(10px) scale(1.2);
+}
+button:hover {
+    transform: scale(0.95) rotate(1deg);
+    filter: brightness(0.9);
+}
+button:active {
+    transform: scale(1.1) rotate(-4deg);
+    filter: brightness(1.12);
+}

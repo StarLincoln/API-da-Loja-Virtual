@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="icon" type="image/png" href="./assets/Outro.png">
+    <title>Lojas Najas</title>
+</head>
+<body>
+    <header>
+        <img src="./assets/Logotipo.png" alt="Loja da Naja" onclick="jukeBox('./assets/WonderOfU.mp3')">
+    </header>
+    <div class="mainContent">
+        <h1> A Loja da Naja é S-Sensacional </h1>
+        <p> Não seja uma <b>cobra-cega</b> e veja aos nosso produtos que farão você querer <b>trocar a pele</b> de tanta emoção. Nós nunca deixaremos você na <b>mão</b>, e sempre te daremos aquele <b>aconchego</b> como se fosse um <b>bote!</b> </p>
+        <div class="noMeio">
+            <a href="http://localhost:3000/loja/produtos">
+                <button class="butao"> Clique aqui!!! para acessar nossos produtos </button>
+            </a>
+        </div>
+        <div class="formulario">
+            <form onsubmit="event.preventDefault(); direcionarPagina();">
+                <label for="id">Ou:</label><br>
+                <div class="alinhar">
+                <input id="id" type="text" placeholder="Caçe a sua vítima e depois...
+(Pesquise um produto)">
+                <button type="submit">Aperte aqui</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        let array = []
+
+        fetch("http://localhost:3000/produtos")
+    .then(res => res.json())
+    .then(dados => {
+        console.log("DADOS BRUTOS:", dados);
+
+        if (Array.isArray(dados)) {
+            array = dados;
+        } else {
+            array = dados.arrProdutos;
+        }
+
+        console.log("ARRAY FINAL:", array);
+    })
+    .catch(err => console.error(err));
+
+        function direcionarPagina() {
+            let coisa = document.getElementById("id").value.toLowerCase().trim()
+
+            let produto = array.find(element => {
+                return element.nome.toLowerCase().includes(coisa) ||
+                element.id == Number(coisa)
+            })
+
+            console.log(coisa, "SLA")
+            console.log(array, "SLA")
+            if(!produto) return alert("Essa toca não é da nossa espécie")
+
+            window.location.href = "http://localhost:3000/loja/produtos/" + produto.id
+        }
+        function jukeBox(som){
+            const sfx = new Audio(som)
+            sfx.play()
+        }
+    </script>
+</body>
+</html>

@@ -1,9 +1,11 @@
 import { readFile, writeFile } from 'fs/promises';
 import express, { type Request, type Response, type NextFunction} from 'express';
+import cors from "cors"
 const app = express();
 const PORT = 3000;
 
 // Bloco 3 - Middlewares
+app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(express.static("public"))
@@ -128,7 +130,7 @@ app.delete("/produtos/:id", async (req, res) => {
 })
 // Cadastrar um item, ou seja, um segundo post
 app.get("/loja/cadastrar", (req, res) => {
-    res.render("cadastrar"); // seu cadastrar.ejs
+    res.render("cadastrar");
 });
 app.post("/loja/cadastrar", async (req, res) => {
     try {
