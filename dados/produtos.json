@@ -46,5 +46,21 @@
     "categoria": "Outro",
     "estoque": "50",
     "disponivel": true
+  },
+  {
+    "id": 6,
+    "nome": "Katana de Ninja",
+    "preco": "667",
+    "categoria": "Outro",
+    "estoque": "2",
+    "disponivel": true
+  },
+  {
+    "id": 7,
+    "nome": "Traje de Ninja",
+    "preco": "467",
+    "categoria": "Roupa",
+    "estoque": "50",
+    "disponivel": true
   }
 ]

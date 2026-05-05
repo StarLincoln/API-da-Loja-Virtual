@@ -11,9 +11,10 @@
     <header>
         <img src="./assets/Logotipo.png" alt="Loja da Naja" onclick="jukeBox('./assets/WonderOfU.mp3')">
     </header>
+    <main>
     <div class="mainContent">
         <h1> A Loja da Naja é S-Sensacional </h1>
-        <p> Não seja uma <b>cobra-cega</b> e veja aos nosso produtos que farão você querer <b>trocar a pele</b> de tanta emoção. Nós nunca deixaremos você na <b>mão</b>, e sempre te daremos aquele <b>aconchego</b> como se fosse um <b>bote!</b> </p>
+        <p> Não seja uma <b>cobra-cega</b> e veja os nosso produtos que farão você querer <b>trocar de pele</b> de tanta emoção. Nós nunca deixaremos você na <b>mão</b>, e sempre te daremos aquele <b>aconchego</b> como se fosse um <b>bote!</b> </p>
         <div class="noMeio">
             <a href="http://localhost:3000/loja/produtos">
                 <button class="butao"> Clique aqui!!! para acessar nossos produtos </button>
@@ -23,14 +24,33 @@
             <form onsubmit="event.preventDefault(); direcionarPagina();">
                 <label for="id">Ou:</label><br>
                 <div class="alinhar">
-                <input id="id" type="text" placeholder="Caçe a sua vítima e depois...
-(Pesquise um produto)">
-                <button type="submit">Aperte aqui</button>
+                    <input id="id" type="text" 
+                    placeholder="Caçe a sua vítima e depois..." 
+                    onmouseenter="this.placeholder='(Pesquise um produto)'"
+                    onmouseleave="this.placeholder='Caçe a sua vítima e depois...'">
+                    <button type="submit"
+                    onmouseenter="this.innerText = '(Enviar)'"
+                    onmouseleave="this.innerText = 'Dê o Bote'"
+                    >Dê o Bote</button>
                 </div>
             </form>
         </div>
+        <hr style="border: none;border-top: 10px dotted #ffbd59;">
+        <div class="secondThings">
+            <h1>Nenhuma presa te interessou?</h1>
+            <p>
+                RENOVE NOSSAS ESCAMAS! Adicione um novo produto ao nosso serpentário (Catálogo). 
+                <a href="http://localhost:3000/loja/cadastrar"> CLIQUE AQUI! </a> 
+                para criar um novo ninho!!!</p>
+        </div>
     </div>
-
+    <hr style="height: 10px; border: none; border-top: 10px dashed #00ff41;">
+    </main>
+    <footer>
+        <p>LOJA FICTÍCIA</p>
+        <p>Projeto API-LOJA</p>
+        <p>Por: Caio Lincoln - 2026</p>
+    </footer>
     <!-- Scripts -->
     <script>
         let array = []
