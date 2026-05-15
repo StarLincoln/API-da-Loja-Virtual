@@ -21,6 +21,9 @@ body {
     min-height: 100vh;
 }
 header {
+    display: flex;
+    align-items: center;
+    gap: 30px;
     margin: 0;
     padding: 0;
     background-color: #ffbd59;
@@ -30,6 +33,9 @@ header img {
     height: 15vh;
     margin-left: 4vw;
     transition: all 1s;
+}
+header h1 {
+    font-size: 50px;
 }
 button {
     background-color: #00ff41;
@@ -77,6 +83,7 @@ footer {
 }
 .noMeio {
     display: flex;
+    gap: 20px;
     justify-content: center; 
     align-items: center;     
     margin: 3%;
@@ -113,21 +120,46 @@ footer {
     padding: 5%;
     margin: 2vw;
 }
-.scales-pattern {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 100px; /* Altura do detalhe das escamas no topo */
-  background: 
-    radial-gradient(circle at 50% 0%, #2c3e50 20%, transparent 21%),
-    radial-gradient(circle at 50% 100%, #2c3e50 20%, transparent 21%),
-    radial-gradient(circle at 100% 50%, #34495e 20%, transparent 21%),
-    radial-gradient(circle at 0% 50%, #34495e 20%, transparent 21%);
-  background-size: 40px 40px;
-  background-position: 0 0, 20px 20px, 20px 0, 0 20px;
-  opacity: 0.3;
-  mask-image: linear-gradient(to bottom, black, transparent); /* Faz as escamas sumirem suavemente */
+.secaoNoMeio {
+    height: 80vh;
+    display: grid;
+    place-items: center;
+}
+.cadastrar {
+    gap: 10px;
+    width: 65vw;
+    position: absolute;
+    background-color: #262626;
+    padding: 20px;
+}
+.cadastrar h1 {
+    font-size: 40px;
+}
+.cadastrar input, .cadastrar select {
+    background-color: #00ff41;
+    margin-block: 5px 10px;
+    height: 5vh;
+    border: none;
+    width: 100%;
+    font-size: 25px;
+}
+.cadastrar label{
+    font-size: 25px;
+}
+.cadastrar button {
+    margin: 2%;
+    border: none;
+    border-radius: 10px;
+    height: 7.5vh;
+    width: 60%;
+    font-size: 25px;
+}
+.cadastrar .noMeio {
+    margin: 0;
+}
+.ocupeTudo {
+    margin: 0%;
+    width: 100%;
 }
 
 /* Interações */

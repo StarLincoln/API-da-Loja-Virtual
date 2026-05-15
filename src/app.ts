@@ -1,16 +1,21 @@
 import { readFile, writeFile } from 'fs/promises';
 import express, { type Request, type Response, type NextFunction} from 'express';
 import cors from "cors"
+import { fileURLToPath } from 'url';
+import path, { dirname } from 'path';
 const app = express();
 const PORT = 3000;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 
 // Bloco 3 - Middlewares
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
-app.use(express.static("public"))
 app.set("view engine", "ejs")
-app.set("views", "/home/caio_lincoln/VS Code/api-loja/src/views")
+app.set("views", path.join(__dirname, "views"))
+app.use(express.static(path.join(process.cwd(), "public")))
 // Logger customizado
 app.use((req, res, next) => {
     const hora = new Date().toLocaleTimeString()
@@ -29,7 +34,7 @@ interface Produto {
 }
 
 // Bloco 2 - Persistência em JSON
-const caminho: string = "/home/caio_lincoln/VS Code/api-loja/dados/produtos.json"
+const caminho: string = path.join(__dirname, "../dados/produtos.json")
 // carregarDados()
 async function carregarDados(): Promise<Produto[]> {
     try{
@@ -52,7 +57,7 @@ app.post("/produtos", async (req, res) => {
     try{
         const {nome, preco, categoria, estoque} = req.body
         const arrProdutos = await carregarDados() || []
-        let proximoID = Math.max(...arrProdutos.map(x => x.id)) ?? 0
+        let proximoID = arrProdutos.length > 0 ? Math.max(...arrProdutos.map(x => x.id)) : 0
         const produto: Produto = {
             id: proximoID + 1,
             nome,
@@ -63,7 +68,7 @@ app.post("/produtos", async (req, res) => {
         }
         arrProdutos.push(produto)
 
-        salvarProdutos(arrProdutos)
+        await salvarProdutos(arrProdutos)
         console.log("Produto adicionado com sucesso")
         res.status(201).json(produto)
     } catch {
@@ -81,7 +86,7 @@ app.put("/produtos/:id", async (req, res) => {
         if (req.body.preco) euNaoGostodeTS.preco = Number(req.body.preco)
         arrProdutos[index] = euNaoGostodeTS
 
-        salvarProdutos(arrProdutos)
+        await salvarProdutos(arrProdutos)
         console.log("Produto atualizado com sucesso")
         res.status(200).json(arrProdutos[index])
     } catch {
@@ -122,7 +127,7 @@ app.delete("/produtos/:id", async (req, res) => {
         arrProdutos.splice(index, 1)
         
         console.log("Produto removido com sucesso")
-        salvarProdutos(arrProdutos)
+        await salvarProdutos(arrProdutos)
         res.status(200).json(produtoRemove)
     } catch {
         res.status(500).json({erro: "Não foi possível excluir o produto"})
@@ -139,7 +144,7 @@ app.post("/loja/cadastrar", async (req, res) => {
         const produto: Produto = {
             id: proximoID + 1,
             nome: req.body.nome,
-            preco: req.body.preco,
+            preco: Number(req.body.preco),
             categoria: req.body.categoria,
             estoque: req.body.estoque,
             disponivel: Number(req.body.estoque) > 0
@@ -147,12 +152,13 @@ app.post("/loja/cadastrar", async (req, res) => {
         arrProdutos.push(produto)
 
         console.log("Produto cadastrado com sucesso")
-        salvarProdutos(arrProdutos)
-        res.status(200).render("detalhe", {arrProdutos: produto})
+        await salvarProdutos(arrProdutos)
+        res.status(200).redirect("/loja/produtos/" + produto.id)
     } catch {
         res.status(500)
     }
 })
+
 // Bloco 5 - Páginas HTML com EJS
 // Ver a lista de produtos
 app.get("/loja/produtos", async (req, res) => {

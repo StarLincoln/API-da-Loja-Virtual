@@ -65,8 +65,6 @@
         } else {
             array = dados.arrProdutos;
         }
-
-        console.log("ARRAY FINAL:", array);
     })
     .catch(err => console.error(err));
 
@@ -78,8 +76,6 @@
                 element.id == Number(coisa)
             })
 
-            console.log(coisa, "SLA")
-            console.log(array, "SLA")
             if(!produto) return alert("Essa toca não é da nossa espécie")
 
             window.location.href = "http://localhost:3000/loja/produtos/" + produto.id
