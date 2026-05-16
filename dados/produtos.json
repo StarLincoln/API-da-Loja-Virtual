@@ -1,1 +1,42 @@
-[]
+[
+  {
+    "id": 1,
+    "nome": "Caneta",
+    "preco": 5,
+    "categoria": "Outro",
+    "estoque": "100",
+    "disponivel": true
+  },
+  {
+    "id": 2,
+    "nome": "Roupa da gucci",
+    "preco": 5400.99,
+    "categoria": "Roupa",
+    "estoque": "1",
+    "disponivel": true
+  },
+  {
+    "id": 3,
+    "nome": "Iphode",
+    "preco": 5000,
+    "categoria": "Eletrônico",
+    "estoque": "50",
+    "disponivel": true
+  },
+  {
+    "id": 4,
+    "nome": "Ifoode",
+    "preco": 20,
+    "categoria": "Alimento",
+    "estoque": "67",
+    "disponivel": true
+  },
+  {
+    "id": 5,
+    "nome": "Katana de Ninja",
+    "preco": 100,
+    "categoria": "Outro",
+    "estoque": "0",
+    "disponivel": false
+  }
+]

@@ -1,30 +1,36 @@
-<style>
-    .contain {
-        padding-inline: 10px;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background-color: aliceblue;
-        border: 2px, solid, gray;
-    }
-    ul {
-        border-radius: 5%;
-        padding-block: 10px;
-    }
-    .disponivel {
-        background-color: greenyellow;
-    }
-    .esgotado {
-        background-color: red;
-    }
-</style>
-<div class="contain">
-    <h1>Produto: <%= arrProdutos.nome %></h1>
-    <ul class="<%= arrProdutos.estoque > 0? 'disponivel' : 'esgotado' %>">
-        <li>Preço: R$<%= arrProdutos.preco %></li>
-        <li>Categoria: <%= arrProdutos.categoria %></li>
-        <li>Estoque: <%= arrProdutos.estoque %></li>
-        <li>Disponível: <%= arrProdutos.disponivel? 'Disponível': 'Esgotado' %></li>
-    </ul>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="/styles.css" />
+    <link rel="icon" type="image/png" href="/assets/Outro.png" />
+    <title>Detalhe <%= arrProdutos.nome %></title>
+  </head>
+  <body>
+    <header>
+      <img src="/assets/Logotipo.png" alt="Loja da Naja" />
+      <h1>Detalhes</h1>
+    </header>
+    <section class="secaoNoMeio">
+      <div class="detalhe">
+        <h1>
+          <img
+            src="<%= '/assets/' + arrProdutos.categoria + '.png' %>"
+            alt=""
+            role="presentation"
+          />
+          <%= arrProdutos.nome %>
+        </h1>
+        <div class="<%= arrProdutos.disponivel? 'card': 'esgotado' %>">
+          <ul>
+            <li>Preço: R$<%= arrProdutos.preco %></li>
+            <li>Categoria: <%= arrProdutos.categoria %></li>
+            <li>Estoque: <%= arrProdutos.estoque %></li>
+            <li>Disponível: <%= arrProdutos.disponivel? 'Sim': 'Não'%></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

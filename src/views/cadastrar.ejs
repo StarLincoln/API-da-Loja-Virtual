@@ -9,40 +9,40 @@
   </head>
   <body>
     <header>
-      <img src="/assets/Logotipo.png" alt="Loja da Naja">
+      <img src="/assets/Logotipo.png" alt="Loja da Naja" />
       <h1>Cadastrar</h1>
     </header>
     <section class="secaoNoMeio">
       <div class="cadastrar">
-      <h1>Cadastre um produto</h1>
-      <form action="/loja/cadastrar" method="post">
-        <label for="nome">Produto: </label><br />
-        <input type="text" name="nome" /><br />
+        <h1>Cadastre um produto</h1>
+        <form action="/loja/cadastrar" method="post">
+          <label for="nome">Produto: </label><br />
+          <input type="text" name="nome" /><br />
 
-        <label for="preco">Preço:</label><br />
-        <input type="number" name="preco" step="0.01" min="0"/><br />
+          <label for="preco">Preço:</label><br />
+          <input type="number" name="preco" step="0.01" min="0" /><br />
 
-        <div class="noMeio">
-        <div class="ocupeTudo">
-          <label for="categoria">Categoria</label><br />
-          <select name="categoria">
-            <option value="Outro">Outros</option>
-            <option value="Eletrônico">Eletrônico</option>
-            <option value="Roupa">Roupa</option>
-            <option value="Alimento">Alimento</option>
-          </select><br />
-        </div>
+          <div class="noMeio">
+            <div class="ocupeTudo">
+              <label for="categoria">Categoria</label><br />
+              <select name="categoria">
+                <option value="Outro">Outros</option>
+                <option value="Eletrônico">Eletrônico</option>
+                <option value="Roupa">Roupa</option>
+                <option value="Alimento">Alimento</option></select
+              ><br />
+            </div>
 
-        <div class="ocupeTudo">
-          <label for="estoque">Estoque</label><br />
-          <input type="number" name="estoque" /><br />
-        </div>
-        </div>
-        
-        <div class="noMeio">
-          <button type="submit">Dê o bote (Enviar)</button>
-        </div>
-      </form>
+            <div class="ocupeTudo">
+              <label for="estoque">Estoque</label><br />
+              <input type="number" name="estoque" /><br />
+            </div>
+          </div>
+
+          <div class="noMeio">
+            <button type="submit">Dê o bote (Enviar)</button>
+          </div>
+        </form>
       </div>
     </section>
   </body>
