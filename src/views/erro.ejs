@@ -1,13 +1,39 @@
-<h1>Houve um ERRO!</h1>
-<h2><%= nome %></h2>
-<p><%= mensagem %></p>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="icon" href="/assets/Outro.png">
+    <title>Erro!!!</title>
+</head>
+<body>
+    <section class="error">
+        <div class="mensagem">
+    <h1>Houve um ERRO! Parece que o caçador virou a presa</h1>
+    <h2><%= nome %></h2>
+    <p><%= mensagem %></p>
 
+    <a href="/index.html">
+        <button>Voltar?</button>
+    </a>
 
-<% if(locals.causa) { %>
-    <h3> Causa: </h3>
-    <pre> <%= causa %> </pre>
-<% } %>
-<% if(detalhe) {%>
-    <h3> Detalhes: </h3>
-    <pre> <%= detalhe %> </pre>
-<% } %>
+    <% if(locals.causa) { %>
+        <h3> Causa: </h3>
+        <pre> <%= causa %> </pre>
+        <% } %>
+    <% if(detalhe) {%>
+        <h3> Detalhes: </h3>
+        <pre> <%= detalhe %> </pre>
+    <% } %>
+    </div>
+    <audio id="musica" loop><source src="/assets/AmazingGrace.mp3" type="audio/mpeg"></audio>
+    </section>
+    <script>
+        document.addEventListener('click', () => {
+            const music = document.getElementById('musica')
+            if (music.paused) music.play()
+        }, {once: true})
+    </script>
+</body>
+</html>

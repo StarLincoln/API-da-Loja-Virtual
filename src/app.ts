@@ -172,11 +172,15 @@ app.get("/loja/produtos", async (req, res) => {
     }
 })
 // Ver detalher de um produto 
-app.get("/loja/produtos/:id", async (req, res) => {
+app.get("/loja/produtos/:id", async (req, res, next) => {
     try {
         const arrProdutos = await carregarDados()
         const index = arrProdutos.findIndex(x => x.id === Number(req.params.id))
-        if(index === -1) return res.status(404).json({erro: "ID inesxistente"})
+        if(index === -1){
+            const err = new Error("ID Inexistente");
+            (err as any).status = 404
+            return next(err)
+        }
 
         console.log("Foi possível acessar Produto", index)
         res.status(200).render("detalhe", {arrProdutos: arrProdutos[index]})

@@ -1,6 +1,7 @@
 /* Imports */
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Special+Elite&display=swap');
 
 /* Tudo */
 * {
@@ -256,6 +257,40 @@ footer {
 }
 .Outro {
   background-color: #ff7e00;
+}
+/* Error.ejs */
+.error {
+  background-image: url("/assets/ErroBackground.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  height: 100vh;
+  font-family: "Special Elite", system-ui ;
+  padding: 5%;
+}
+.mensagem {
+  display: grid;
+  gap: 15px;
+}
+.mensagem h1{
+  font-family: "Special Elite", system-ui;
+  font-size: 45px;
+
+}
+.mensagem h2{
+  font-size: 30px;
+}
+.mensagem p {
+  font-size: 20px;
+  margin-bottom: 50px;
+}
+.mensagem button {
+  background-color: #774e4e;
+  border: none;
+  width: 10vw;
+  height: 5vh;
+  color: #ed1c24;
 }
 
 /* Interações */
