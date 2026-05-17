@@ -1,13 +1,5 @@
 [
   {
-    "id": 1,
-    "nome": "Caneta",
-    "preco": 5,
-    "categoria": "Outro",
-    "estoque": "100",
-    "disponivel": true
-  },
-  {
     "id": 2,
     "nome": "Roupa da gucci",
     "preco": 5400.99,
@@ -37,6 +29,22 @@
     "preco": 100,
     "categoria": "Outro",
     "estoque": "0",
+    "disponivel": false
+  },
+  {
+    "id": 6,
+    "nome": "1 e 67",
+    "preco": 10.99,
+    "categoria": "Outro",
+    "estoque": "0",
+    "disponivel": false
+  },
+  {
+    "id": 7,
+    "nome": "apple",
+    "preco": 10,
+    "categoria": "Outro",
+    "estoque": "",
     "disponivel": false
   }
 ]

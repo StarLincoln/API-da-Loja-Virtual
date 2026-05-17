@@ -120,6 +120,7 @@ footer {
   padding: 5%;
   margin: 2vw;
 }
+/* Cadastrar.ejs */
 .secaoNoMeio {
   height: 80vh;
   display: grid;
@@ -162,6 +163,7 @@ footer {
   margin: 0%;
   width: 100%;
 }
+/* detalhe.ejs */
 .detalhe {
   justify-content: center;
   min-width: 40vw;
@@ -198,6 +200,64 @@ footer {
   margin-inline: 3vw;
   color: #e0e0e0;
 }
+/* produtos.ejs */
+.produtos {
+  background-color: #262626;
+  padding: 2%;
+  margin-top: 5%;
+  margin-inline: 10%;
+  
+}
+.produtos h1{
+  text-align: center;
+  font-size: 50px;
+  margin-bottom: 50px;
+}
+.tabela {
+  width: 90%;
+  margin: 2%;
+  gap: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-size: 20px;
+}
+.tabela table {
+  table-layout: fixed;
+  width: 30vw;
+  height: 40vh;
+  border-collapse: collapse;
+}
+.tabela td, th {
+  height: 25%;
+  box-sizing: border-box;
+}
+.tabela table, th, td, tr {
+  padding: 2px;
+  border: #00ff41 solid 4px;
+  
+}
+.tabela tbody tr td img {
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+}
+.tabela tbody tr td[rowspan="2"] {
+  align-items: center; 
+}
+.Eletrônico {
+  background-color: #00b7ef;
+}
+.Roupa {
+  background-color: #22b14c;
+}
+.Alimento {
+  background-color: #ed1c24;
+}
+.Outro {
+  background-color: #ff7e00;
+}
+
 /* Interações */
 header img:hover {
   transform: scale(0.9) translate(-10px);

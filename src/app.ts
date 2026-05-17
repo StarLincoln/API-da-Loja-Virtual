@@ -3,6 +3,7 @@ import express, { type Request, type Response, type NextFunction} from 'express'
 import cors from "cors"
 import { fileURLToPath } from 'url';
 import path, { dirname } from 'path';
+import { error } from 'console';
 const app = express();
 const PORT = 3000;
 const __filename = fileURLToPath(import.meta.url);
@@ -170,7 +171,7 @@ app.get("/loja/produtos", async (req, res) => {
         res.status(500)
     }
 })
-// Ver detalher de um produto
+// Ver detalher de um produto 
 app.get("/loja/produtos/:id", async (req, res) => {
     try {
         const arrProdutos = await carregarDados()

@@ -1,40 +1,83 @@
-<h1> Todos os Produtos </h1>
-<table border="1">
-    <tbody>
-        <% arrProdutos.forEach(p => { %>
-            <tr>
-                <th colspan="3">Produto <%= p.id %> </th>
-            </tr>
-            <tr>
-                <td>Categoria</td>
-                <td>Nome</td>
-                <td><%= p.nome %></td>
-            </tr>
-            <tr>
-            <tr>
-                <td rowspan="2">
-                    <% if (p.categoria === "Eletrônico") { %>
-                        🖥️
-                    <% } else if (p.categoria === "Roupa") { %>
-                        👕
-                    <% } else if (p.categoria === "Alimento") { %>
-                        🍕
-                    <% } else { %>
-                        ➕
-                    <% } %>
-                </td>
-                <td>Preço</td>
-                <td><%= p.preco %></td>
-            </tr>
-            <tr>
-                <td>Estoque</td>
-                <td><%= p.estoque %></td>
-            </tr>
-            <tr>
-                <td><%= p.categoria %></td>
-                <td>Disponivel</td>
-                <td><%= p.disponivel %></td>
-            </tr>
-        <% }) %>
-    </tbody>
-</table>
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/styles.css">
+    <link rel="icon" type="image/png" href="/assets/Outro.png">
+    <title>Produtos</title>
+</head>
+
+<body>
+    <header>
+        <a href="http://localhost:3000/index.html">
+            <img src="/assets/Logotipo.png" alt="Loja da Naja" />
+        </a>
+        <h1> Todos os Produtos</h1>
+    </header>
+    <section class="secaoNoMeio">
+        <div class="produtos">
+            <h1>Quantidade de produtos: <%= arrProdutos.length %></h1>
+        <div class="tabela">
+            <% arrProdutos.forEach(p=> { %>
+                <table border="1">
+                    <colgroup>
+                        <col class="<%= p.categoria %>">
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th colspan="3">Produto <%= p.id %>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Categoria</td>
+                            <td>Nome</td>
+                            <td>
+                                <%= p.nome %>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td rowspan="2">
+                                <% if (p.categoria==="Eletrônico" ) { %>
+                                    <img src="/assets/Eletrônico.png" alt="Eletrônico">
+                                    <% } else if (p.categoria==="Roupa" ) { %>
+                                        <img src="/assets/Roupa.png" alt="Roupa">
+                                        <% } else if (p.categoria==="Alimento" ) { %>
+                                            <img src="/assets/Alimento.png" alt="Alimento">
+                                            <% } else { %>
+                                                <img src="/assets/Outro.png" alt="Outro">
+                                                <% } %>
+                            </td>
+                            <td>Preço</td>
+                            <td>
+                                <%= p.preco %>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Estoque</td>
+                            <td>
+                                <%= p.estoque %>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <%= p.categoria %>
+                            </td>
+                            <td>Disponivel</td>
+                            <td>
+                                <%= p.disponivel %>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+                <% }) %>
+        </div>
+        </div>
+    </section>
+</body>
+
+</html>
