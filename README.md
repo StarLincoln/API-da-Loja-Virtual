@@ -1,7 +1,7 @@
 # API-da-Loja-Virtual
 ## Pratica integradora com o tema: API da Loja Virtual.
 
-### Depências necessárias para a execuçãoc
+### Depências necessárias para a execução
 - Git
 - Node.js
 - Typescript
