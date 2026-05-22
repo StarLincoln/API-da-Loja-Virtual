@@ -1,5 +1,6 @@
 # API-da-Loja-Virtual
 ## Pratica integradora com o tema: API da Loja Virtual.
+Por: Caio Lincoln, 2º B do Senac
 
 ### Depências necessárias para a execução
 - Git
